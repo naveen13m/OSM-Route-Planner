@@ -11,7 +11,8 @@
 using namespace std::experimental;
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
-{   
+{
+    // Read as binary data (binary) and seek to the end of the stream (ate)
     std::ifstream is{path, std::ios::binary | std::ios::ate};
     if( !is )
         return std::nullopt;
@@ -24,6 +25,8 @@ static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
 
     if( contents.empty() )
         return std::nullopt;
+
+    // 'move' transfers the vector contents to another variable without using pointers or references
     return std::move(contents);
 }
 
@@ -55,12 +58,16 @@ int main(int argc, const char **argv)
     // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
     // user input for these values using std::cin. Pass the user input to the
     // RoutePlanner object below in place of 10, 10, 90, 90.
+    float start_x, start_y, end_x, end_y;
+
+    //std::cin >> start_x >> start_y >> end_x >> end_y;
 
     // Build Model.
     RouteModel model{osm_data};
 
     // Create RoutePlanner object and perform A* search.
-    RoutePlanner route_planner{model, 10, 10, 90, 90};
+    //RoutePlanner route_planner{model, start_x, start_y, end_x, end_y};
+    RoutePlanner route_planner{model, 10, 20, 80, 40};
     route_planner.AStarSearch();
 
     std::cout << "Distance: " << route_planner.GetDistance() << " meters. \n";

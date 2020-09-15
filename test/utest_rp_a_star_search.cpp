@@ -6,6 +6,9 @@
 #include "../src/route_model.h"
 #include "../src/route_planner.h"
 
+/* Functions marked with TEST_F are the actual testing functions
+ * all of these use the RoutePlannerTest fixture - 1st argument
+ * name of the test is next, usually function name - 2nd argument */
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
 {   
@@ -38,7 +41,7 @@ std::vector<std::byte> ReadOSMData(const std::string &path) {
 //--------------------------------//
 //   Beginning RoutePlanner Tests.
 //--------------------------------//
-
+// Sets up data configuration that will be used across multiple tests
 class RoutePlannerTest : public ::testing::Test {
   protected:
     std::string osm_data_file = "../map.osm";

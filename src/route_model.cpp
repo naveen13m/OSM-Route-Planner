@@ -51,7 +51,8 @@ void RouteModel::Node::FindNeighbors() {
     }
 }
 
-
+// Finds out the closet node on a road to the given coordinates
+// by excluding footways.
 RouteModel::Node &RouteModel::FindClosestNode(float x, float y) {
     Node input;
     input.x = x;
